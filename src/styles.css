@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global Colors & Reset */
+:root {
+  --neon-green: #00ff00;
+  --dark-bg: #000000;
+  --card-bg: #0a0a0a;
+  --font-main: 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: white;
+  margin: 0;
+  font-family: var(--font-main);
+}
+
+.neon-text {
+  color: var(--neon-green);
+}
+
+.btn-primary {
+  background-color: var(--neon-green);
+  color: black;
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  padding: 12px 24px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-outline:hover {
+  background: rgba(0, 255, 0, 0.1);
+}

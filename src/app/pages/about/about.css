@@ -1,0 +1,117 @@
+.about-container {
+  padding: 80px 10%; /* Increased top padding for better spacing */
+  color: white;
+}
+
+/* Profile Section Layout */
+.profile-grid {
+  display: flex;
+  gap: 80px; /* Increased gap to give the large image breathing room */
+  align-items: flex-start; /* Aligns text to the top of the large image */
+  margin-bottom: 100px;
+}
+
+.profile-image {
+  flex: 0 0 300px; /* This forces the image container to be 500px wide */
+}
+
+.image-frame {
+  border: 3px solid var(--neon-green); /* Slightly thicker border for the bigger size */
+  padding: 10px;
+  width: 100%; /* Spans the full 500px of the parent */
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1); /* Subtle neon glow */
+}
+
+.image-frame img {
+  width: 100%; /* Fills the frame perfectly */
+  height: auto;
+  display: block;
+  filter: grayscale(10%); /* Optional: matches the aesthetic in your screen */
+}
+
+.profile-text {
+  flex: 1;
+}
+
+.about-title {
+  font-size: 3.5rem; /* Larger title to match the large image */
+  margin-bottom: 25px;
+  font-weight: 800;
+}
+
+.profile-text p {
+  line-height: 1.8;
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+/* Skills Section */
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+}
+
+.skills-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.skill-column {
+  flex: 1;
+}
+
+.skill-header {
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skill-list li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+/* The neon green squares */
+.skill-box {
+  width: 25px;
+  height: 25px;
+  background-color: var(--neon-green);
+  display: inline-block;
+  flex-shrink: 0; /* Prevents the square from squishing */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .profile-image {
+    flex: 0 0 350px; /* Medium size for tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .profile-image {
+    flex: 0 0 100%;
+    max-width: 400px; /* Back to smaller on phones */
+  }
+
+  .skills-grid {
+    flex-direction: column;
+    gap: 40px;
+  }
+}

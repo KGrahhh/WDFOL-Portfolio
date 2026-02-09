@@ -1,0 +1,151 @@
+.contact-container {
+  padding: 60px 10%;
+  background-color: #000;
+  color: white;
+  font-family: sans-serif;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+/* Main Layout Grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Form on left, boxes on right */
+  gap: 40px;
+  align-items: start;
+}
+
+/* Left Side: Form Alignment */
+.contact-form-wrapper {
+  width: 100%;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  color: var(--neon-green);
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+/* Inputs and Textarea Alignment Fix */
+.form-group input, 
+.form-group textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--neon-green);
+  padding: 15px;
+  color: white;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding doesn't break alignment */
+}
+
+/* Button Alignment Fix */
+.send-btn {
+  width: 100%; /* Matches input width exactly */
+  background-color: var(--neon-green);
+  color: black;
+  border: none;
+  padding: 18px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  box-sizing: border-box; /* Matches input box model */
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+  background-color: #00cc00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+}
+
+/* Right Side: Info Boxes */
+.contact-info-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-box {
+  border: 1px solid #1a2a2a;
+  padding: 30px;
+  text-align: center;
+  background: rgba(0, 255, 0, 0.02);
+  transition: border-color 0.3s ease;
+}
+
+.info-box:hover {
+  border-color: var(--neon-green);
+}
+
+.box-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.box-content {
+  font-size: 1.3rem;
+  word-break: break-all;
+}
+
+/* Social Icons styling */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.icon-square {
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: 0.3s;
+}
+
+.icon-square:hover {
+  background: var(--neon-green);
+  color: black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
