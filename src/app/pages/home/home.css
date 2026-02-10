@@ -5,12 +5,7 @@
   min-height: 80vh;
   padding: 0 10%;
   gap: 40px;
-  opacity: 0;
-  animation: fadeInPage 1s ease-in forwards;
-}
-
-.hero-content {
-  flex: 1;
+  background-color: transparent;
 }
 
 .greeting {
@@ -18,108 +13,71 @@
   margin-bottom: 10px;
 }
 
-/* Updated Role Title with 10s limit */
 .role-title {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 20px;
   display: inline-block;
   overflow: hidden; 
-  border-right: .15em solid var(--neon-green); 
+  border-right: .15em solid var(--accent-color); 
   white-space: nowrap; 
-  letter-spacing: .15em; 
-  animation: 
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end 13, /* Blinks for ~10 seconds */
-    hide-cursor 0s forwards 10s;  /* Hard stop at 10s */
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
 }
 
 .description {
-  color: #cccccc;
+  color: var(--description-color);
   line-height: 1.6;
   max-width: 500px;
   margin-bottom: 30px;
 }
 
-.cta-group {
-  display: flex;
-  gap: 15px;
-}
-
-.hero-visual {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
 .image-frame {
-  border: 2px solid var(--neon-green);
+  border: 2px solid var(--accent-color);
   padding: 5px;
   display: inline-block;
   line-height: 0;
+  transition: border-color 0.3s ease;
 }
 
 .image-frame img {
   max-width: 400px;
   width: 100%;
   height: auto;
-  filter: grayscale(20%);
 }
 
+/* PULSE ANIMATION (Now uses Accent Color) */
 .image-frame.neon-border {
   animation: neon-pulse 3s infinite ease-in-out;
 }
 
-/* Responsive for Mobile */
-@media (max-width: 768px) {
-  .home-container {
-    flex-direction: column-reverse;
-    text-align: center;
-    padding: 50px 20px;
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--accent-color);
+    border-color: var(--accent-color);
   }
-  
-  .description {
-    margin: 0 auto 30px;
-  }
-
-  .cta-group {
-    justify-content: center;
+  50% {
+    box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px var(--accent-color);
+    border-color: var(--accent-color);
   }
 }
 
-/* --- ANIMATIONS --- */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-color); }
+}
 
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
 }
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--neon-green); }
+.cta-group {
+  display: flex;
+  gap: 20px; /* This adds a 20px space between the two buttons */
+  margin-top: 10px;
 }
 
-/* Removes the cursor line after the 10s limit */
-@keyframes hide-cursor {
-  to { border-right: none; }
-}
-
-@keyframes neon-pulse {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 255, 0, 0.2), inset 0 0 5px rgba(0, 255, 0, 0.1);
-    border-color: rgba(0, 255, 0, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.3);
-    border-color: var(--neon-green);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(0, 255, 0, 0.2), inset 0 0 5px rgba(0, 255, 0, 0.1);
-    border-color: rgba(0, 255, 0, 0.5);
-  }
-}
-
-@keyframes fadeInPage {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Ensure the buttons have consistent sizing */
+.btn-primary, .btn-outline {
+  min-width: 160px; /* Optional: makes buttons the same width */
+  text-align: center;
 }

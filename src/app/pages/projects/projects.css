@@ -1,6 +1,8 @@
 .projects-container {
   padding: 80px 10%;
-  color: white;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .projects-header {
@@ -11,10 +13,11 @@
 .section-title {
   font-size: 3rem;
   margin-bottom: 10px;
+  color: var(--text-main);
 }
 
 .subtitle {
-  color: #888;
+  color: var(--description-color);
   font-size: 1.1rem;
 }
 
@@ -27,15 +30,17 @@
 
 /* Individual Card Styling */
 .project-card {
-  background: #0a0a0a;
-  border: 1px solid #1a1a1a;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  /* Flips from Dark Grey to White */
+  background: var(--bg-main); 
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .project-card:hover {
   transform: translateY(-10px);
-  border-color: var(--neon-green);
+  border-color: var(--accent-color);
 }
 
 .project-image-wrapper {
@@ -43,7 +48,9 @@
   height: 200px;
   overflow: hidden;
   margin-bottom: 20px;
-  border: 1px solid #333;
+  /* Frame around the project image */
+  border: 2px solid var(--accent-color); 
+  transition: border-color 0.3s ease;
 }
 
 .project-image-wrapper img {
@@ -60,20 +67,22 @@
 }
 
 .project-name {
-  color: var(--neon-green);
+  color: var(--accent-color); /* Green in Dark, Orange in Light */
   font-size: 1.5rem;
   margin-bottom: 10px;
+  transition: color 0.3s ease;
 }
 
 .project-desc {
-  color: #ccc;
+  color: var(--description-color);
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 20px;
-  height: 75px; /* Keeps card heights consistent */
+  height: 75px; 
   overflow: hidden;
 }
 
+/* Technology Tags */
 .project-tags {
   display: flex;
   gap: 10px;
@@ -82,14 +91,18 @@
 
 .project-tags span {
   font-size: 0.75rem;
-  background: #111;
-  color: var(--neon-green);
+  /* Background turns slightly grey/white depending on theme */
+  background: rgba(128, 128, 128, 0.1); 
+  color: var(--accent-color);
   padding: 4px 10px;
-  border: 1px solid var(--neon-green);
+  border: 1px solid var(--accent-color);
   border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .btn-outline.small {
   padding: 8px 16px;
   font-size: 0.8rem;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
 }

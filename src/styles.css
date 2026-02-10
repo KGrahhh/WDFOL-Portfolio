@@ -1,26 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
-/* Global Colors & Reset */
+/* ============================= */
+/* THEME VARIABLES (GLOBAL) */
+/* ============================= */
 :root {
-  --neon-green: #00ff00;
-  --dark-bg: #000000;
-  --card-bg: #0a0a0a;
+  /* DARK MODE DEFAULT */
+  --bg-main: #000000;
+  --text-main: #ffffff;
+  --accent-color: #00ff4c;      /* Neon Green */
+  --description-color: #cccccc; /* Light Grey for paragraphs */
   --font-main: 'Inter', 'Segoe UI', sans-serif;
 }
 
+/* ============================= */
+/* LIGHT MODE OVERRIDES */
+/* ============================= */
+body.light-theme {
+  --bg-main: #ffffff;
+  --text-main: #000000;
+  --accent-color: #ff9800;      /* Vibrant Orange */
+  --description-color: #333333; /* Dark Grey for paragraphs */
+}
+
+/* ============================= */
+/* BASE PAGE STYLES */
+/* ============================= */
 body {
-  background-color: var(--dark-bg);
-  color: white;
+  background-color: var(--bg-main);
+  color: var(--text-main);
   margin: 0;
   font-family: var(--font-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Force all generic text and borders to follow theme */
 .neon-text {
-  color: var(--neon-green);
+  color: var(--accent-color) !important;
 }
 
+.neon-border {
+  border-color: var(--accent-color) !important;
+}
+
+/* ============================= */
+/* HEADER + NAV (THEME AWARE) */
+/* ============================= */
+header, nav {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+.logo, .logo span, .logo a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a {
+  color: var(--text-main);
+  text-decoration: none;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* ============================= */
+/* BUTTONS (GLOBAL) */
+/* ============================= */
 .btn-primary {
-  background-color: var(--neon-green);
-  color: black;
+  background-color: var(--accent-color);
+  color: #000; /* Black text on Green/Orange */
   border: none;
   padding: 12px 24px;
   font-weight: bold;
@@ -28,10 +78,15 @@ body {
   text-transform: uppercase;
 }
 
+/* White text for primary button in Light Mode looks cleaner */
+body.light-theme .btn-primary {
+  color: #ffffff !important;
+}
+
 .btn-outline {
   background: transparent;
-  border: 1px solid var(--neon-green);
-  color: var(--neon-green);
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
   padding: 12px 24px;
   font-weight: bold;
   cursor: pointer;
@@ -39,5 +94,54 @@ body {
 }
 
 .btn-outline:hover {
-  background: rgba(0, 255, 0, 0.1);
+  background: rgba(128, 128, 128, 0.1);
+}
+
+/* ============================= */
+/* SOCIAL ICONS LOGO COLOR LOGIC */
+/* ============================= */
+
+/* DARK MODE (DEFAULT GREEN) */
+.icon-square img, .icon-box img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  /* Filter for Neon Green */
+  filter: brightness(0) saturate(100%) invert(71%) sepia(86%) saturate(1439%) hue-rotate(61deg) brightness(108%) contrast(119%);
+  transition: filter 0.3s ease;
+}
+
+/* LIGHT MODE (FLIP TO ORANGE) */
+body.light-theme .icon-square img,
+body.light-theme .icon-box img {
+  /* This filter creates the Neon Orange color (#ff9800) */
+  filter: invert(56%) sepia(91%) saturate(1914%) hue-rotate(3deg) brightness(103%) contrast(106%) !important;
+}
+
+/* HOVER STATES (Turns White/Black depending on background) */
+.icon-square:hover img, .icon-box:hover img {
+  filter: brightness(0) invert(1) !important; /* Turns icon white */
+}
+
+.icon-square, .icon-box {
+  border: 1.5px solid var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.icon-square:hover, .icon-box:hover {
+  background-color: var(--accent-color);
+}
+
+/* ============================= */
+/* GLOBAL LAYOUT FIXES */
+/* ============================= */
+img {
+  max-width: 100%;
+}
+
+p {
+  color: var(--description-color);
 }

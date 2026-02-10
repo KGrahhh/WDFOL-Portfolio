@@ -1,11 +1,15 @@
 <nav class="navbar">
   <div class="logo">
-    <span class="white-bracket"><</span> 
-    <span class="neon-text">Portfolio</span> 
-    <span class="white-bracket">/></span>
+    <a routerLink="/" class="logo-link">
+      <img 
+        [src]="isLightTheme ? '/kcorange.png' : '/kclogo.png'" 
+        alt="Khristian Pradilla Logo" 
+        class="nav-logo">
+    </a>
   </div>
+
   <ul class="nav-links">
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
     <li><a routerLink="/about" routerLinkActive="active">About</a></li>
     <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
     <li><a routerLink="/resume" routerLinkActive="active">Resume</a></li>

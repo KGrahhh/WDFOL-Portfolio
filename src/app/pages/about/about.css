@@ -1,64 +1,89 @@
+/* --- MAIN CONTAINER --- */
 .about-container {
-  padding: 80px 10%; /* Increased top padding for better spacing */
-  color: white;
+  padding: 80px 10%;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Profile Section Layout */
+/* --- PROFILE SECTION --- */
 .profile-grid {
   display: flex;
-  gap: 80px; /* Increased gap to give the large image breathing room */
-  align-items: flex-start; /* Aligns text to the top of the large image */
+  gap: 80px; 
+  align-items: flex-start;
   margin-bottom: 100px;
 }
 
 .profile-image {
-  flex: 0 0 300px; /* This forces the image container to be 500px wide */
+  flex: 0 0 350px;
+  max-width: 350px;
+  position: relative;
+  z-index: 1;
+}
+
+/* THE MAIN BOX AROUND THE IMAGE */
+.image-accent-box {
+  position: relative;
+  border: 2px solid var(--accent-color);
+  transition: all 0.3s ease;
+}
+
+/* THE OFFSET BOX (THE ONE BEHIND) */
+.image-accent-box::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--accent-color);
+  top: 20px;   /* Adjusted offset to look like the Home Page */
+  left: -20px; 
+  z-index: -1;
+  transition: all 0.3s ease;
 }
 
 .image-frame {
-  border: 3px solid var(--neon-green); /* Slightly thicker border for the bigger size */
-  padding: 10px;
-  width: 100%; /* Spans the full 500px of the parent */
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1); /* Subtle neon glow */
+  line-height: 0;
+  display: block;
+  overflow: hidden;
+  background-color: var(--bg-main);
 }
 
 .image-frame img {
-  width: 100%; /* Fills the frame perfectly */
+  width: 100%;
   height: auto;
   display: block;
-  filter: grayscale(10%); /* Optional: matches the aesthetic in your screen */
+  object-fit: cover;
 }
 
+/* --- TEXT CONTENT --- */
 .profile-text {
   flex: 1;
 }
 
 .about-title {
-  font-size: 3.5rem; /* Larger title to match the large image */
+  font-size: 3.5rem;
   margin-bottom: 25px;
   font-weight: 800;
 }
 
-.profile-text p {
+.about-description {
   line-height: 1.8;
-  color: #ccc;
+  color: var(--description-color);
   font-size: 1.1rem;
 }
 
-/* Skills Section */
-.section-title {
-  font-size: 2.2rem;
-  margin-bottom: 40px;
-}
-
+/* --- SKILLS SECTION --- */
 .skills-grid {
   display: flex;
-  justify-content: space-between;
-  gap: 50px;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 150px; 
+  width: 100%;
 }
 
 .skill-column {
-  flex: 1;
+  flex: 0 1 auto;
+  min-width: 250px;
 }
 
 .skill-header {
@@ -69,11 +94,6 @@
   gap: 12px;
 }
 
-.skill-list {
-  list-style: none;
-  padding: 0;
-}
-
 .skill-list li {
   display: flex;
   align-items: center;
@@ -82,22 +102,30 @@
   font-size: 1.2rem;
 }
 
-/* The neon green squares */
 .skill-box {
   width: 25px;
   height: 25px;
-  background-color: var(--neon-green);
+  background-color: var(--accent-color);
   display: inline-block;
-  flex-shrink: 0; /* Prevents the square from squishing */
+  flex-shrink: 0;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 1024px) {
-  .profile-image {
-    flex: 0 0 350px; /* Medium size for tablets */
-  }
+/* --- LIGHT MODE SPECIFIC FIXES --- */
+/* Forces all boxes and borders to use the Orange theme */
+body.light-theme .image-accent-box,
+body.light-theme .image-accent-box::before,
+body.light-theme .skill-box {
+  border-color: var(--accent-color) !important;
+  background-color: var(--accent-color); /* For the solid skill boxes */
 }
 
+/* Fixes the Social Icons (GitHub/Instagram) so they aren't Green in Light Mode */
+body.light-theme .icon-square img,
+body.light-theme .icon-box img {
+  filter: invert(56%) sepia(91%) saturate(1914%) hue-rotate(3deg) brightness(103%) contrast(106%) !important;
+}
+
+/* --- RESPONSIVENESS --- */
 @media (max-width: 768px) {
   .profile-grid {
     flex-direction: column;
@@ -106,8 +134,8 @@
   }
   
   .profile-image {
-    flex: 0 0 100%;
-    max-width: 400px; /* Back to smaller on phones */
+    max-width: 300px;
+    margin-bottom: 40px;
   }
 
   .skills-grid {

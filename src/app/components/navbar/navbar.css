@@ -1,31 +1,68 @@
+/* --- NAVBAR CONTAINER --- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 10%;
-  background: black;
-  border-bottom: 1px solid #1a1a1a;
+  padding: 10px 10%;
+  background-color: var(--bg-main);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  transition: background-color 0.3s ease;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+/* --- LOGO --- */
+.nav-logo {
+  height: 135px;
+  width: auto;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
+/* --- LOGO HOVER --- */
+.logo-link:hover .nav-logo {
+  transform: scale(1.05);
+}
+
+/* --- NAV LINKS --- */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 30px;
+  margin: 0;
 }
 
 .nav-links a {
-  color: white;
+  color: var(--text-main);
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: 0.3s;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.nav-links a:hover, .nav-links a.active {
-  color: var(--neon-green);
-  border-bottom: 2px solid var(--neon-green);
+.nav-links a.active {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* --- THEME TOGGLE BUTTON --- */
+.theme-toggle {
+  margin-left: 20px;
+  padding: 5px 10px;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: darkorange;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+  .nav-logo { height: 60px; }
+  .navbar { padding: 10px 5%; }
+  .nav-links { gap: 15px; }
+  .theme-toggle { padding: 4px 8px; font-size: 14px; }
 }
