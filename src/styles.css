@@ -2,11 +2,11 @@
 /* THEME VARIABLES (GLOBAL) */
 /* ============================= */
 :root {
-  /* DARK MODE DEFAULT */
-  --bg-main: #000000;
-  --text-main: #ffffff;
+  /* DARK MODE - Softened to Midnight Charcoal */
+  --bg-main: #121212;           
+  --text-main: #f5f5f5;         
   --accent-color: #00ff4c;      /* Neon Green */
-  --description-color: #cccccc; /* Light Grey for paragraphs */
+  --description-color: #b0b0b0; /* Softer grey for readability */
   --font-main: 'Inter', 'Segoe UI', sans-serif;
 }
 
@@ -14,10 +14,11 @@
 /* LIGHT MODE OVERRIDES */
 /* ============================= */
 body.light-theme {
-  --bg-main: #ffffff;
-  --text-main: #000000;
+  /* Softened to a clean "Cloud" white */
+  --bg-main: #fafafa;           
+  --text-main: #1a1a1a;         
   --accent-color: #ff9800;      /* Vibrant Orange */
-  --description-color: #333333; /* Dark Grey for paragraphs */
+  --description-color: #555555; 
 }
 
 /* ============================= */
@@ -28,7 +29,8 @@ body {
   color: var(--text-main);
   margin: 0;
   font-family: var(--font-main);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Smoother transition for theme switching */
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Force all generic text and borders to follow theme */
@@ -46,6 +48,7 @@ body {
 header, nav {
   background-color: var(--bg-main);
   color: var(--text-main);
+  transition: background-color 0.4s ease;
 }
 
 .logo, .logo span, .logo a {
@@ -70,15 +73,19 @@ nav a:hover, nav a.active {
 /* ============================= */
 .btn-primary {
   background-color: var(--accent-color);
-  color: #000; /* Black text on Green/Orange */
+  color: #000; 
   border: none;
   padding: 12px 24px;
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-/* White text for primary button in Light Mode looks cleaner */
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
 body.light-theme .btn-primary {
   color: #ffffff !important;
 }
@@ -91,10 +98,12 @@ body.light-theme .btn-primary {
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
+  transition: all 0.3s ease;
 }
 
 .btn-outline:hover {
   background: rgba(128, 128, 128, 0.1);
+  transform: translateY(-2px);
 }
 
 /* ============================= */
@@ -106,7 +115,6 @@ body.light-theme .btn-primary {
   width: 24px;
   height: 24px;
   object-fit: contain;
-  /* Filter for Neon Green */
   filter: brightness(0) saturate(100%) invert(71%) sepia(86%) saturate(1439%) hue-rotate(61deg) brightness(108%) contrast(119%);
   transition: filter 0.3s ease;
 }
@@ -114,13 +122,12 @@ body.light-theme .btn-primary {
 /* LIGHT MODE (FLIP TO ORANGE) */
 body.light-theme .icon-square img,
 body.light-theme .icon-box img {
-  /* This filter creates the Neon Orange color (#ff9800) */
   filter: invert(56%) sepia(91%) saturate(1914%) hue-rotate(3deg) brightness(103%) contrast(106%) !important;
 }
 
-/* HOVER STATES (Turns White/Black depending on background) */
+/* HOVER STATES */
 .icon-square:hover img, .icon-box:hover img {
-  filter: brightness(0) invert(1) !important; /* Turns icon white */
+  filter: brightness(0) invert(1) !important; 
 }
 
 .icon-square, .icon-box {
@@ -144,4 +151,5 @@ img {
 
 p {
   color: var(--description-color);
+  line-height: 1.6; /* Improved readability */
 }
