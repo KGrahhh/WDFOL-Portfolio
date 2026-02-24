@@ -216,3 +216,32 @@ body.light-theme .footer-bottom p {
   background-color: var(--bg-main);
   border: 2px solid var(--accent-color);
 }
+
+.links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-list li {
+  margin-bottom: 8px; /* Spacing between links */
+}
+
+.links-list a {
+  text-decoration: none;
+  color: inherit; /* Inherits your footer text color */
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.links-list a:hover {
+  opacity: 0.7; /* Simple hover effect */
+}
+
+/* Ensure the content is spread out */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}

@@ -1,7 +1,6 @@
 <footer class="footer-container">
   <div class="footer-content">
 
-    <!-- SOCIALS -->
     <div class="footer-section socials">
       <p class="footer-label">Hit me up:</p>
       <div class="icon-group">
@@ -17,46 +16,27 @@
       </div>
     </div>
 
-    <!-- ABOUT -->
-    <div class="footer-section about">
-      <p class="footer-label">About</p>
-      <p class="footer-subtext">
-        A Web Developer passionate about creating innovative and user-friendly digital experiences.
-      </p>
+    <div class="footer-section quick-links">
+      <p class="footer-label">Explore:</p>
+      <ul class="links-list">
+        <li><a href="#">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
     </div>
 
-    <!-- THEME TOGGLE -->
     <div class="footer-section theme-selection">
       <div class="theme-buttons-container">
-
-        <!-- LIGHT MODE -->
-        <div
-          class="toggle-option"
-          role="button"
-          tabindex="0"
-          (click)="setTheme(true)"
-        >
+        <div class="toggle-option" role="button" tabindex="0" (click)="setTheme(true)">
           <span class="mode-label">Light Mode</span>
-          <div
-            class="circle light-choice"
-            [class.active-light]="isLightMode"
-          ></div>
+          <div class="circle light-choice" [class.active-light]="isLightMode"></div>
         </div>
 
-        <!-- DARK MODE -->
-        <div
-          class="toggle-option"
-          role="button"
-          tabindex="0"
-          (click)="setTheme(false)"
-        >
+        <div class="toggle-option" role="button" tabindex="0" (click)="setTheme(false)">
           <span class="mode-label">Dark Mode</span>
-          <div
-            class="circle dark-choice"
-            [class.active-dark]="!isLightMode"
-          ></div>
+          <div class="circle dark-choice" [class.active-dark]="!isLightMode"></div>
         </div>
-
       </div>
     </div>
 

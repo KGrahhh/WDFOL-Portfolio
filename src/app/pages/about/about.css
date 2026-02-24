@@ -111,15 +111,13 @@
 }
 
 /* --- LIGHT MODE SPECIFIC FIXES --- */
-/* Forces all boxes and borders to use the Orange theme */
 body.light-theme .image-accent-box,
 body.light-theme .image-accent-box::before,
 body.light-theme .skill-box {
   border-color: var(--accent-color) !important;
-  background-color: var(--accent-color); /* For the solid skill boxes */
+  background-color: var(--accent-color); 
 }
 
-/* Fixes the Social Icons (GitHub/Instagram) so they aren't Green in Light Mode */
 body.light-theme .icon-square img,
 body.light-theme .icon-box img {
   filter: invert(56%) sepia(91%) saturate(1914%) hue-rotate(3deg) brightness(103%) contrast(106%) !important;

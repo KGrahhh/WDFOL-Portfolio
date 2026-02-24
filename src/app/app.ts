@@ -19,9 +19,8 @@ export class App implements OnInit {
   protected readonly showIntro = signal(true);
 
   ngOnInit() {
-    // Hide the intro after 2 seconds
     setTimeout(() => {
       this.showIntro.set(false);
-    }, 2000);
+    }, 800);
   }
 }
