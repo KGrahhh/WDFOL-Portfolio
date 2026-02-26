@@ -40,12 +40,39 @@
   color: var(--text-main);
   text-decoration: none;
   font-weight: 500;
+  position: relative; /* Required for the absolute underline */
+  padding: 5px 0;
   transition: color 0.3s ease;
 }
 
 .nav-links a.active {
   color: var(--accent-color);
   border-bottom: 2px solid var(--accent-color);
+}
+
+/* Create the underline using a pseudo-element */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--accent-color);
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.nav-links a:hover {
+  color: var(--accent-color);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a.active::after {
+  width: 100%;
 }
 
 /* --- THEME TOGGLE BUTTON --- */

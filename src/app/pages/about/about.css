@@ -1,16 +1,27 @@
+/* --- VARIABLES --- 
+   Update these to match your existing color palette 
+*/
+:root {
+  --bg-main: #0a0a0a;
+  --text-main: #ffffff;
+  --description-color: #a0a0a0;
+  --accent-color: #00ff88; /* Your Neon Green */
+  --accent-rgb: 0, 255, 136; /* Same color in RGB for transparency effects */
+}
+
 /* --- MAIN CONTAINER --- */
 .about-container {
   padding: 80px 10%;
   background-color: var(--bg-main);
   color: var(--text-main);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 /* --- PROFILE SECTION --- */
 .profile-grid {
   display: flex;
   gap: 80px; 
-  align-items: flex-start;
+  align-items: center; /* Changed to center for better balance */
   margin-bottom: 100px;
 }
 
@@ -21,24 +32,29 @@
   z-index: 1;
 }
 
-/* THE MAIN BOX AROUND THE IMAGE */
 .image-accent-box {
   position: relative;
   border: 2px solid var(--accent-color);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
 }
 
-/* THE OFFSET BOX (THE ONE BEHIND) */
 .image-accent-box::before {
   content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 2px solid var(--accent-color);
-  top: 20px;   /* Adjusted offset to look like the Home Page */
+  border: 2px solid rgba(var(--accent-rgb), 0.5);
+  top: 20px;
   left: -20px; 
   z-index: -1;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+}
+
+/* Interaction: Offset box moves on hover */
+.profile-image:hover .image-accent-box::before {
+  top: 10px;
+  left: -10px;
+  border-color: var(--accent-color);
 }
 
 .image-frame {
@@ -53,6 +69,11 @@
   height: auto;
   display: block;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.profile-image:hover img {
+  transform: scale(1.05); /* Subtle zoom on your photo */
 }
 
 /* --- TEXT CONTENT --- */
@@ -66,6 +87,11 @@
   font-weight: 800;
 }
 
+.neon-text {
+  color: var(--accent-color);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
+}
+
 .about-description {
   line-height: 1.8;
   color: var(--description-color);
@@ -73,71 +99,107 @@
 }
 
 /* --- SKILLS SECTION --- */
-.skills-grid {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 150px; 
-  width: 100%;
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
 }
 
-.skill-column {
-  flex: 0 1 auto;
-  min-width: 250px;
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+  width: 100%;
 }
 
 .skill-header {
   font-size: 1.6rem;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   display: flex;
   align-items: center;
   gap: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.skill-list li {
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* THE SKILL CARD (UI/UX Improvement) */
+.skill-card {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.03); /* Glassmorphism base */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: default;
 }
 
-.skill-box {
-  width: 25px;
-  height: 25px;
+/* HOVER EFFECTS: Slide right and glow */
+.skill-card:hover {
+  background: rgba(var(--accent-rgb), 0.08);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  transform: translateX(8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.skill-indicator {
+  width: 12px;
+  height: 12px;
   background-color: var(--accent-color);
-  display: inline-block;
-  flex-shrink: 0;
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--accent-color);
+  transition: all 0.4s ease;
 }
 
-/* --- LIGHT MODE SPECIFIC FIXES --- */
-body.light-theme .image-accent-box,
-body.light-theme .image-accent-box::before,
-body.light-theme .skill-box {
-  border-color: var(--accent-color) !important;
-  background-color: var(--accent-color); 
+.skill-card:hover .skill-indicator {
+  transform: rotate(45deg);
+  border-radius: 50%; /* Smooth shape change on hover */
 }
 
-body.light-theme .icon-square img,
-body.light-theme .icon-box img {
-  filter: invert(56%) sepia(91%) saturate(1914%) hue-rotate(3deg) brightness(103%) contrast(106%) !important;
+.skill-card span {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-main);
+  transition: color 0.3s ease;
+}
+
+.skill-card:hover span {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* --- LIGHT MODE ADAPTATION --- */
+body.light-theme .skill-card {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .skill-card:hover {
+  background: rgba(var(--accent-rgb), 0.1);
 }
 
 /* --- RESPONSIVENESS --- */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .profile-grid {
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-  
-  .profile-image {
-    max-width: 300px;
-    margin-bottom: 40px;
+    gap: 40px;
   }
 
+  .about-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 480px) {
   .skills-grid {
-    flex-direction: column;
-    gap: 40px;
+    grid-template-columns: 1fr;
   }
 }
