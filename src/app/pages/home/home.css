@@ -1,3 +1,4 @@
+/* --- LAYOUT --- */
 .home-container {
   display: flex;
   align-items: center;
@@ -8,6 +9,11 @@
   background-color: transparent;
 }
 
+.hero-content {
+  flex: 1;
+}
+
+/* --- TYPOGRAPHY --- */
 .greeting {
   font-size: 3rem;
   margin-bottom: 10px;
@@ -31,100 +37,17 @@
   margin-bottom: 30px;
 }
 
-.image-frame {
-  /* This creates a fixed-size square container */
-  width: 350px; 
-  height: 350px;
-  
-  border-radius: 50%;     /* Makes the container a circle */
-  border: 3px solid var(--accent-color);
-  overflow: hidden;       /* This acts as the "cookie cutter" */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  animation: neon-pulse 3s infinite ease-in-out;
+.neon-text {
+  color: var(--accent-color);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
 }
 
-.image-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.1); 
-  
-  display: block;
-  transition: transform 0.5s ease; 
-}
-
-/* PULSE ANIMATION  */
-.image-frame.neon-border {
-  animation: neon-pulse 3s infinite ease-in-out;
-}
-
-@keyframes neon-pulse {
-  0%, 100% {
-    box-shadow: 0 0 5px var(--accent-color);
-    border-color: var(--accent-color);
-  }
-  50% {
-    box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px var(--accent-color);
-    border-color: var(--accent-color);
-  }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--accent-color); }
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-.cta-group {
-  display: flex;
-  gap: 20px; /* This adds a 20px space between the two buttons */
-  margin-top: 10px;
-}
-
-/* Ensure the buttons have consistent sizing */
-.btn-primary, .btn-outline {
-  min-width: 160px; /* Optional: makes buttons the same width */
-  text-align: center;
-}
-
-/* Update the image-frame to be circular and add floating animation */
-.image-frame {
-  border-radius: 50%; /* Makes it a circle - optional, remove if you want square */
-  overflow: hidden;   /* Keeps the image inside the border */
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-  animation: neon-pulse 3s infinite ease-in-out, float 6s infinite ease-in-out;
-  cursor: pointer;
-}
-
-/* Hover Effect: Scales up and intensifies the glow */
-.image-frame:hover {
-  transform: scale(1.05) rotate(2deg);
-  box-shadow: 0 0 40px var(--accent-color);
-}
-
-/* Floating Animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-/* Image inside the frame: add a slight grayscale to color transition */
-.image-frame img {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
-  filter: grayscale(30%); /* Subtle professional look */
-  transition: filter 0.4s ease;
-}
-
-.image-frame:hover img {
-  filter: grayscale(0%);
+/* --- HERO VISUAL (The "About" Style Profile) --- */
+.hero-visual {
+  flex: 0 0 350px;
+  max-width: 350px;
+  position: relative;
+  z-index: 1;
 }
 
 .visual-wrapper {
@@ -134,19 +57,97 @@
   align-items: center;
 }
 
-.blob-shape {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: var(--accent-color);
-  filter: blur(80px);
-  opacity: 0.3;
-  z-index: -1;
-  border-radius: 50%;
-  animation: blob-pulse 8s infinite alternate;
+/* The primary neon border box */
+.image-accent-box {
+  position: relative;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
+  line-height: 0;
 }
 
-@keyframes blob-pulse {
-  from { transform: scale(1); }
-  to { transform: scale(1.3) translate(10px, -10px); }
+/* The secondary offset border (The "Ghost" box) */
+.image-accent-box::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(var(--accent-rgb), 0.5);
+  top: 20px;
+  left: -20px; 
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+/* INTERACTION: Moves the offset border and zooms image */
+.hero-visual:hover .image-accent-box::before {
+  top: 10px;
+  left: -10px;
+  border-color: var(--accent-color);
+}
+
+.image-frame {
+  width: 350px; 
+  height: 350px;
+  overflow: hidden;
+  display: block;
+  background-color: #0a0a0a; /* Matches your background */
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(30%);
+  transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.hero-visual:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+/* --- BUTTONS --- */
+.cta-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.btn-primary, .btn-outline {
+  min-width: 160px;
+  text-align: center;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-color); }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 992px) {
+  .home-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  .description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-group {
+    justify-content: center;
+  }
 }
