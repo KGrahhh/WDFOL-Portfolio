@@ -276,3 +276,8 @@ p { color: var(--description-color); line-height: 1.8; }
     text-align: center;
   }
 }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}

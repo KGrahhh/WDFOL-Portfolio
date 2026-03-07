@@ -1,17 +1,32 @@
-/* --- INTRO OVERLAY --- */
+/* ============================= */
+/* INTRO OVERLAY                 */
+/* ============================= */
+
 .intro-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #121212; /* Your Midnight Charcoal */
+  background-color: #121212;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10000;
   transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+  padding: 20px;
+  box-sizing: border-box;
 }
+
+/* center wrapper */
+
+.intro-content {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* title */
 
 .intro-title {
   font-size: 3rem;
@@ -22,25 +37,39 @@
   margin: 0;
   opacity: 0;
   animation: fadeInUp 1s ease forwards;
+  word-wrap: break-word;
 }
+
+/* line animation */
 
 .intro-line {
   height: 2px;
   background-color: var(--accent-color);
   width: 0;
-  margin: 10px auto;
+  margin: 14px auto 0;
   animation: expandLine 0.8s ease forwards 0.5s;
 }
 
-/* --- THE EXIT --- */
+/* exit animation */
+
 .intro-overlay.hide {
   transform: translateY(-100%);
   pointer-events: none;
 }
 
+/* ============================= */
+/* ANIMATIONS                    */
+/* ============================= */
+
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes expandLine {
@@ -48,6 +77,31 @@
   to { width: 150px; }
 }
 
+/* ============================= */
+/* MOBILE RESPONSIVE             */
+/* ============================= */
+
 @media (max-width: 768px) {
-  .intro-title { font-size: 1.8rem; }
+
+  .intro-title {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+
+  .intro-line {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .intro-title {
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+  }
+
+  .intro-line {
+    width: 90px;
+  }
+
 }
