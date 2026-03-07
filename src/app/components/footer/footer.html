@@ -1,34 +1,53 @@
 <footer class="footer-container">
+
   <div class="footer-content">
 
+    <!-- LEFT SIDE -->
     <div class="footer-section socials">
       <p class="footer-label">Hit me up:</p>
+
       <div class="icon-group">
         <a href="https://www.linkedin.com/in/khristian-pradilla-286b493a5/" class="icon-box">
           <img src="/linkedin.png" alt="LinkedIn">
         </a>
+
         <a href="https://github.com/KGrahhh" class="icon-box">
           <img src="/github.png" alt="GitHub">
         </a>
-        <a href="https://www.instagram.com/_khriii?igsh=aDhmZnNyb2xtMnNs&utm_source=qr" class="icon-box">
+
+        <a href="https://www.instagram.com/_khriii" class="icon-box">
           <img src="/instagram.png" alt="Instagram">
         </a>
       </div>
     </div>
 
+    <!-- RIGHT SIDE -->
     <div class="footer-section theme-selection">
+
       <div class="theme-buttons-container">
-        <div class="toggle-option" role="button" tabindex="0" (click)="setTheme(true)">
+
+        <div class="toggle-option"
+             role="button"
+             tabindex="0"
+             (click)="setTheme(true)">
           <span class="mode-label">Light Mode</span>
-          <div class="circle light-choice" [class.active-light]="isLightMode"></div>
+          <div class="circle light-choice"
+               [class.active-light]="isLightMode"></div>
         </div>
 
-        <div class="toggle-option" role="button" tabindex="0" (click)="setTheme(false)">
+        <div class="toggle-option"
+             role="button"
+             tabindex="0"
+             (click)="setTheme(false)">
           <span class="mode-label">Dark Mode</span>
-          <div class="circle dark-choice" [class.active-dark]="!isLightMode"></div>
+          <div class="circle dark-choice"
+               [class.active-dark]="!isLightMode"></div>
         </div>
+
       </div>
+
     </div>
 
   </div>
+
 </footer>
