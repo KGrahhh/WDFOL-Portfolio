@@ -1,12 +1,13 @@
+/* --- RESUME CONTAINER --- */
 .resume-container {
   padding: 60px 8%;
-  /* Flips background from #000 to #FFF */
   background-color: var(--bg-main);
   color: var(--text-main);
   font-family: sans-serif;
   transition: all 0.3s ease;
 }
 
+/* --- HEADER --- */
 .resume-header {
   display: flex;
   justify-content: center;
@@ -21,12 +22,11 @@
   color: var(--text-main);
 }
 
-/* Updated Download Button */
 .download-btn {
   position: absolute;
   right: 0;
   background-color: var(--accent-color);
-  color: #ffffff !important; /* Keep text white for contrast on orange/green */
+  color: #ffffff !important;
   border: none;
   padding: 10px 20px;
   font-weight: bold;
@@ -42,12 +42,29 @@
   box-shadow: 0 0 15px var(--accent-color);
 }
 
-/* Three Column Layout */
+/* --- INTRO / ABOUT ME --- */
+.resume-intro {
+  margin-bottom: 60px;
+  max-width: 800px;
+}
+
+/* --- THREE COLUMN GRID --- */
 .resume-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* Proportions: Education(1), Projects(1.2), Skills(0.8) */
+  grid-template-columns: 1fr 1.2fr 0.8fr; 
   gap: 40px;
   margin-bottom: 50px;
+}
+
+.resume-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pushes the Skills/Language column to the right for a cleaner look */
+.right-align-col {
+  padding-left: 60px;
 }
 
 .column-title {
@@ -62,11 +79,17 @@
   padding-bottom: 5px;
 }
 
-.column-title.center { text-align: center; width: 100%; margin-bottom: 40px; }
+.column-title.center { 
+  text-align: center; 
+  width: 100%; 
+  margin-bottom: 40px; 
+}
 
-.resume-item { margin-bottom: 35px; }
+/* --- RESUME ITEMS --- */
+.resume-item { 
+  margin-bottom: 35px; 
+}
 
-/* Date and Project titles use the Accent Color (Green/Orange) */
 .date-range, .project-title { 
   color: var(--accent-color) !important; 
   font-weight: bold; 
@@ -84,18 +107,42 @@
   color: var(--description-color); 
   font-size: 0.95rem; 
   line-height: 1.6; 
+  text-align: justify;
 }
 
-.spacer-top { margin-top: 60px; }
+/* --- SKILLS & LANGUAGES --- */
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-/* Divider line adapts to theme */
+.skills-list li {
+  font-size: 1.05rem;
+  padding: 8px 0;
+  color: var(--text-main);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.skills-list li::before {
+  content: "▹";
+  color: var(--accent-color);
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.spacer-top { 
+  margin-top: 50px; 
+}
+
+/* --- DIVIDER --- */
 .section-divider {
   height: 1px;
   background-color: rgba(128, 128, 128, 0.3);
   margin: 60px 0;
 }
 
-/* Certifications Grid */
+/* --- CERTIFICATIONS --- */
 .cert-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -103,10 +150,8 @@
 }
 
 .cert-card {
-  /* Dynamic border color */
   border: 1px solid var(--accent-color);
   padding: 20px;
-  /* Very subtle tint of the accent color */
   background: rgba(128, 128, 128, 0.05); 
   transition: transform 0.3s ease;
 }
@@ -122,18 +167,65 @@
   color: var(--accent-color); 
 }
 
-.cert-org { color: var(--description-color); font-size: 0.8rem; margin-bottom: 5px; }
+.cert-org { 
+  color: var(--description-color); 
+  font-size: 0.8rem; 
+  margin-bottom: 5px; 
+}
 
-.cert-date { font-size: 0.9rem; font-weight: bold; color: var(--accent-color); }
+.cert-date { 
+  font-size: 0.9rem; 
+  font-weight: bold; 
+  color: var(--accent-color); 
+}
 
-/* Awards */
-.awards-section { text-align: center; color: var(--text-main); }
-.award-text { font-size: 1.8rem; }
-
-/* Mobile Responsive */
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
-  .resume-grid { grid-template-columns: 1fr; gap: 20px; }
-  .cert-grid { grid-template-columns: 1fr; }
-  .download-btn { position: static; margin-top: 20px; }
-  .resume-header { flex-direction: column; }
+  .resume-grid { 
+    grid-template-columns: 1fr; 
+    gap: 30px; 
+  }
+  
+  .right-align-col {
+    padding-left: 0; /* Reset shift on mobile devices */
+  }
+
+  .cert-grid { 
+    grid-template-columns: 1fr; 
+  }
+
+  .download-btn { 
+    position: static; 
+    margin-top: 20px; 
+  }
+
+  .resume-header { 
+    flex-direction: column; 
+    text-align: center;
+  }
+
+  .main-title {
+    font-size: 3rem;
+  }
+}
+
+/* 1. Remove the blue line (underline) and default link color */
+.cert-link {
+  text-decoration: none !important; /* Removes the underline */
+  color: inherit !important;       /* Makes the text use the existing theme colors */
+  display: block;                  /* Ensures the entire card area is clickable */
+}
+
+/* 2. Optional: Ensure the titles inside don't get the link color */
+.cert-link h3, 
+.cert-link .cert-date {
+  text-decoration: none;
+}
+
+/* 3. Add a "lift" effect to show it's interactive */
+.cert-link:hover .cert-card {
+  transform: translateY(-5px);
+  background: rgba(128, 128, 128, 0.1); /* Subtle highlight on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
