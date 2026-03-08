@@ -1,4 +1,6 @@
-/* --- LAYOUT --- */
+/* ============================= */
+/* HOME CONTAINER (HERO SECTION) */
+/* ============================= */
 .home-container {
   display: flex;
   align-items: center;
@@ -15,8 +17,9 @@
 
 /* --- TYPOGRAPHY --- */
 .greeting {
-  font-size: 3rem;
+  font-size: 3.5rem; /* Slightly larger for impact */
   margin-bottom: 10px;
+  font-weight: 800;
 }
 
 .role-title {
@@ -42,12 +45,15 @@
   text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
 }
 
-/* --- HERO VISUAL (The "About" Style Profile) --- */
+/* ============================= */
+/* HERO VISUAL (PROFILE IMAGE)   */
+/* ============================= */
 .hero-visual {
   flex: 0 0 350px;
   max-width: 350px;
   position: relative;
   z-index: 1;
+  transition: all 0.4s ease;
 }
 
 .visual-wrapper {
@@ -57,7 +63,7 @@
   align-items: center;
 }
 
-/* The primary neon border box */
+/* Primary neon border box */
 .image-accent-box {
   position: relative;
   border: 2px solid var(--accent-color);
@@ -65,7 +71,7 @@
   line-height: 0;
 }
 
-/* The secondary offset border (The "Ghost" box) */
+/* Secondary offset "Ghost" box */
 .image-accent-box::before {
   content: "";
   position: absolute;
@@ -78,7 +84,7 @@
   transition: all 0.4s ease;
 }
 
-/* INTERACTION: Moves the offset border and zooms image */
+/* Interaction: Moves the offset border */
 .hero-visual:hover .image-accent-box::before {
   top: 10px;
   left: -10px;
@@ -90,7 +96,7 @@
   height: 350px;
   overflow: hidden;
   display: block;
-  background-color: #0a0a0a; /* Matches your background */
+  background-color: #0a0a0a;
 }
 
 .image-frame img {
@@ -121,6 +127,75 @@
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: #000;
+  border: none;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn-primary:hover, .btn-outline:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.4);
+}
+
+/* ============================= */
+/* RESPONSIVENESS (MOBILE)       */
+/* ============================= */
+@media (max-width: 992px) {
+  .home-container {
+    flex-direction: column-reverse; /* Text below image */
+    text-align: center;
+    padding-top: 40px;
+    gap: 30px;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .greeting {
+    font-size: 2.2rem; /* Scaled down for mobile */
+  }
+
+  .description {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+  }
+
+  /* SMALLER IMAGE SCALING */
+  .hero-visual {
+    flex: 0 0 240px; 
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  .image-frame {
+    width: 240px; 
+    height: 240px;
+  }
+
+  /* Adjusted ghost box for smaller scale */
+  .image-accent-box::before {
+    top: 15px;
+    left: -15px;
+  }
+
+  .cta-group {
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 /* --- ANIMATIONS --- */
@@ -132,22 +207,4 @@
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
-}
-
-/* --- RESPONSIVENESS --- */
-@media (max-width: 992px) {
-  .home-container {
-    flex-direction: column-reverse;
-    text-align: center;
-    padding-top: 50px;
-  }
-  
-  .description {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .cta-group {
-    justify-content: center;
-  }
 }

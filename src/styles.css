@@ -31,17 +31,34 @@ body {
   position: relative;
 }
 
+/* ============================= */
+/* MOVING BACKGROUND GRID        */
+/* ============================= */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background-image: 
-    linear-gradient(rgba(var(--accent-rgb), 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(var(--accent-rgb), 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.15) 1px, transparent 1px);
   background-size: 50px 50px;
   z-index: -2;
   pointer-events: none;
+  
+  /* Add the animation here */
+  animation: grid-move 20s linear infinite;
+}
+
+/* Define the movement */
+@keyframes grid-move {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    /* Moving 50px ensures a seamless loop because it matches background-size */
+    background-position: 50px 50px;
+  }
 }
 
 /* ============================= */
@@ -254,6 +271,16 @@ body::before {
 }
 
 .dark-choice { background-color: transparent; }
+
+/* Specifically target the dark choice circle when light theme is active */
+body.light-theme .dark-choice {
+  background-color: #000000 !important;
+}
+
+/* Optional: If you want it to stay dark but slightly see-through in Dark Mode */
+body:not(.light-theme) .dark-choice {
+  background-color: transparent;
+}
 
 /* ============================= */
 /* BUTTONS & UTILS               */

@@ -6,17 +6,18 @@
 
 /* PROFILE SECTION */
 
-.profile-grid{
-  display:flex;
-  gap:80px;
-  align-items:center;
-  margin-bottom:100px;
+.profile-grid {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 100px;
 }
 
-.profile-image{
-  flex:0 0 350px;
-  max-width:350px;
-  position:relative;
+.profile-image {
+  flex: 0 0 350px;
+  max-width: 350px;
+  position: relative;
+  z-index: 1;
 }
 
 .image-accent-box{
@@ -156,23 +157,66 @@ body.light-theme .skill-card:hover{
   background:rgba(var(--accent-rgb),0.1);
 }
 
+/* ============================= */
 /* RESPONSIVE */
+/* ============================= */
 
 @media(max-width:992px){
 
 .profile-grid{
 flex-direction:column;
+align-items:center;
 text-align:center;
 gap:40px;
 }
 
+/* CENTER + SHRINK IMAGE */
+
+.profile-image{
+flex:none;
+max-width:220px;
+width:100%;
+margin:0 auto;
+}
+
+.image-frame {
+  width: 350px;
+  height: 350px; /* Fixed square */
+  overflow: hidden;
+  background-color: #0a0a0a;
+}
+
+.image-frame img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.image-accent-box::before{
+top:12px;
+left:-12px;
+}
+
 .about-title{
-font-size:2.8rem;
+font-size:2.6rem;
+}
+
+.about-description{
+font-size:1rem;
 }
 
 }
 
 @media(max-width:480px){
+
+.profile-image{
+max-width:180px;
+}
+
+.image-frame{
+width:180px;
+height:180px;
+}
 
 .skills-grid{
 grid-template-columns:1fr;

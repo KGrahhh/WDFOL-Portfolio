@@ -1,8 +1,9 @@
 .projects-container {
   padding: 80px 10%;
+  /* Force background to stay dark/consistent with your theme */
   background-color: var(--bg-main);
   color: var(--text-main);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
 .projects-header {
@@ -21,26 +22,30 @@
   font-size: 1.1rem;
 }
 
-/* The Grid System */
+/* --- THE GRID SYSTEM --- */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  /* Changed minmax to be more flexible for mobile */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
+  justify-items: center; /* Centers cards horizontally in their tracks */
 }
 
 /* Individual Card Styling */
 .project-card {
-  /* Flips from Dark Grey to White */
-  background: var(--bg-main); 
-  border: 1px solid rgba(128, 128, 128, 0.2);
-  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  background: rgba(255, 255, 255, 0.03); /* Subtle dark glass effect */
+  border: 1px solid rgba(var(--accent-rgb), 0.1);
+  transition: all 0.3s ease;
   padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px; /* Prevents cards from getting too wide on tablet */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .project-card:hover {
   transform: translateY(-10px);
   border-color: var(--accent-color);
+  background: rgba(var(--accent-rgb), 0.05);
 }
 
 .project-image-wrapper {
@@ -48,9 +53,7 @@
   height: 200px;
   overflow: hidden;
   margin-bottom: 20px;
-  /* Frame around the project image */
-  border: 2px solid var(--accent-color); 
-  transition: border-color 0.3s ease;
+  border: 1px solid var(--accent-color); 
 }
 
 .project-image-wrapper img {
@@ -58,7 +61,7 @@
   height: 100%;
   object-fit: cover;
   filter: grayscale(50%);
-  transition: 0.3s;
+  transition: 0.5s ease;
 }
 
 .project-card:hover img {
@@ -67,10 +70,10 @@
 }
 
 .project-name {
-  color: var(--accent-color); /* Green in Dark, Orange in Light */
+  color: var(--accent-color);
   font-size: 1.5rem;
   margin-bottom: 10px;
-  transition: color 0.3s ease;
+  font-weight: 700;
 }
 
 .project-desc {
@@ -78,31 +81,73 @@
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 20px;
-  height: 75px; 
-  overflow: hidden;
+  /* Fixed height for grid alignment */
+  min-height: 75px; 
 }
 
 /* Technology Tags */
 .project-tags {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-wrap: wrap; /* Allows tags to wrap on very small screens */
+  gap: 8px;
+  margin-bottom: 25px;
 }
 
 .project-tags span {
   font-size: 0.75rem;
-  /* Background turns slightly grey/white depending on theme */
-  background: rgba(128, 128, 128, 0.1); 
+  background: rgba(var(--accent-rgb), 0.1); 
   color: var(--accent-color);
   padding: 4px 10px;
-  border: 1px solid var(--accent-color);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
   border-radius: 4px;
-  transition: all 0.3s ease;
 }
 
+/* Action Buttons */
 .btn-outline.small {
-  padding: 8px 16px;
-  font-size: 0.8rem;
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 0.85rem;
   border: 1px solid var(--accent-color);
   color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-outline.small:hover {
+  background: var(--accent-color);
+  color: #000;
+}
+
+/* ============================= */
+/* RESPONSIVE FIXES              */
+/* ============================= */
+@media (max-width: 992px) {
+  .projects-container {
+    padding: 60px 5% 120px;
+  }
+
+  .projects-header {
+    text-align: center; /* Centers the header text */
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr; /* Force single column on mobile */
+    max-width: 450px;
+    margin: 0 auto; /* Centers the entire grid */
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    padding: 15px;
+  }
+  
+  .project-image-wrapper {
+    height: 180px;
+  }
 }
