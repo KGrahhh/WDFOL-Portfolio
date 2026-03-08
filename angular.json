@@ -23,7 +23,9 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "public/robots.txt",
+              "public/sitemap.xml"
             ],
             "styles": [
               "src/styles.css"
