@@ -1,6 +1,5 @@
 .projects-container {
   padding: 80px 10%;
-  /* Force background to stay dark/consistent with your theme */
   background-color: var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
@@ -8,37 +7,41 @@
 
 .projects-header {
   margin-bottom: 60px;
-  text-align: left;
+  text-align: center; 
+  width: 100%;        
 }
 
 .section-title {
   font-size: 3rem;
   margin-bottom: 10px;
   color: var(--text-main);
+  display: inline-block; 
 }
 
 .subtitle {
   color: var(--description-color);
   font-size: 1.1rem;
+  display: block; 
 }
 
-/* --- THE GRID SYSTEM --- */
 .projects-grid {
   display: grid;
-  /* Changed minmax to be more flexible for mobile */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr); 
   gap: 40px;
-  justify-items: center; /* Centers cards horizontally in their tracks */
+  max-width: 1300px;
+  margin: 0 auto; 
 }
 
-/* Individual Card Styling */
+/* ============================= */
+/* PROJECT CARD                  */
+/* ============================= */
+
 .project-card {
-  background: rgba(255, 255, 255, 0.03); /* Subtle dark glass effect */
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(var(--accent-rgb), 0.1);
   transition: all 0.3s ease;
   padding: 20px;
   width: 100%;
-  max-width: 400px; /* Prevents cards from getting too wide on tablet */
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
@@ -48,12 +51,16 @@
   background: rgba(var(--accent-rgb), 0.05);
 }
 
+/* ============================= */
+/* PROJECT IMAGE                 */
+/* ============================= */
+
 .project-image-wrapper {
   width: 100%;
   height: 200px;
   overflow: hidden;
   margin-bottom: 20px;
-  border: 1px solid var(--accent-color); 
+  border: 1px solid var(--accent-color);
 }
 
 .project-image-wrapper img {
@@ -69,6 +76,10 @@
   transform: scale(1.05);
 }
 
+/* ============================= */
+/* TEXT CONTENT                  */
+/* ============================= */
+
 .project-name {
   color: var(--accent-color);
   font-size: 1.5rem;
@@ -81,28 +92,33 @@
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 20px;
-  /* Fixed height for grid alignment */
-  min-height: 75px; 
+  min-height: 75px;
 }
 
-/* Technology Tags */
+/* ============================= */
+/* TECHNOLOGY TAGS               */
+/* ============================= */
+
 .project-tags {
   display: flex;
-  flex-wrap: wrap; /* Allows tags to wrap on very small screens */
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 25px;
 }
 
 .project-tags span {
   font-size: 0.75rem;
-  background: rgba(var(--accent-rgb), 0.1); 
+  background: rgba(var(--accent-rgb), 0.1);
   color: var(--accent-color);
   padding: 4px 10px;
   border: 1px solid rgba(var(--accent-rgb), 0.3);
   border-radius: 4px;
 }
 
-/* Action Buttons */
+/* ============================= */
+/* BUTTON                        */
+/* ============================= */
+
 .btn-outline.small {
   display: inline-block;
   padding: 8px 20px;
@@ -120,15 +136,21 @@
 }
 
 /* ============================= */
-/* RESPONSIVE FIXES              */
+/* RESPONSIVE                    */
 /* ============================= */
+
 @media (max-width: 992px) {
   .projects-container {
-    padding: 60px 5% 120px;
+    /* Changed padding to be equal on sides to ensure centering */
+    padding: 60px 20px 120px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .projects-header {
-    text-align: center; /* Centers the header text */
+    text-align: center;
+    width: 100%;
   }
 
   .section-title {
@@ -136,17 +158,41 @@
   }
 
   .projects-grid {
-    grid-template-columns: 1fr; /* Force single column on mobile */
-    max-width: 450px;
-    margin: 0 auto; /* Centers the entire grid */
+    grid-template-columns: 1fr; 
+    width: 100%;
+    max-width: 450px; 
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project-tags {
+    justify-content: center; 
+  }
+
+  .project-desc {
+    min-height: auto; 
   }
 }
 
 @media (max-width: 480px) {
+  .projects-container {
+    padding: 40px 15px 80px;
+  }
+
   .project-card {
     padding: 15px;
+    width: 100%; 
   }
-  
+
   .project-image-wrapper {
     height: 180px;
   }
