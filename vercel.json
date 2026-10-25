@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/Resume.png", "destination": "/Resume.png" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

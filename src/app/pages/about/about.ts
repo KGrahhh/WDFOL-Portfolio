@@ -16,7 +16,7 @@ export class About {
     {
       label: 'Who I Am',
       paragraphs: [
-        'My name is Khristian Carl J. Pradilla a web development student who resides in Angeles City Pampanga.',
+        'My name is Khristian Carl J. Pradilla, A Web Development student who resides in Angeles City Pampanga.',
         'My career in technology development operates through two main forces which express my artistic skills and my logical reasoning abilities.'
       ]
     },
@@ -50,7 +50,7 @@ export class About {
     this.current.set(index);
   }
 
-  // ---------- TECH SKILLS ----------
+  // ---------- TECH LOGOS ----------
   techs = [
     { name: 'HTML',       icon: 'devicon-html5-plain colored' },
     { name: 'CSS',        icon: 'devicon-css3-plain colored' },
@@ -78,7 +78,7 @@ export class About {
     { name: 'Reliability',         icon: 'shield' }
   ];
 
-  // ---------- CERTIFICATIONS ----------
+  // ---------- CERTIFICATIONS (featured only) ----------
   featuredCerts = CERTIFICATIONS.filter(c => c.featured);
 
   selectedCert = signal<Certification | null>(null);
