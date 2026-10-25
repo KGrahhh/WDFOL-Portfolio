@@ -1,26 +1,26 @@
-<nav class="navbar">
+<nav class="navbar" [class.scrolled]="isScrolled" aria-label="Main navigation">
   <div class="logo">
     <a routerLink="/" class="logo-link">
-      <img 
-        [src]="isLightTheme ? '/kcorange.png' : '/kclogo.png'" 
-        alt="Khristian Pradilla Logo" 
+      <img
+        [src]="isLightTheme ? '/kcorange.png' : '/kclogo.png'"
+        alt="Khristian Pradilla Logo"
         class="nav-logo">
     </a>
   </div>
 
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <input type="checkbox" id="menu-toggle" class="menu-toggle" #menuToggle>
 
-  <label for="menu-toggle" class="burger-label">
+  <label for="menu-toggle" class="burger-label" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </label>
 
   <ul class="nav-links">
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-    <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-    <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
-    <li><a routerLink="/resume" routerLinkActive="active">Resume</a></li>
-    <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuToggle.checked = false">Home</a></li>
+    <li><a routerLink="/about" routerLinkActive="active" (click)="menuToggle.checked = false">About</a></li>
+    <li><a routerLink="/projects" routerLinkActive="active" (click)="menuToggle.checked = false">Projects</a></li>
+    <li><a routerLink="/resume" routerLinkActive="active" (click)="menuToggle.checked = false">Resume</a></li>
+    <li><a routerLink="/contact" routerLinkActive="active" class="nav-cta" (click)="menuToggle.checked = false">Contact</a></li>
   </ul>
 </nav>

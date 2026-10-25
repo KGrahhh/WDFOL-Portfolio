@@ -1,116 +1,135 @@
 <section class="resume-container">
 
-  <div class="resume-header">
-    <h1 class="main-title">My <span class="neon-text">Resume</span></h1>
-    <a href="/My_Resume.jpg" download="Khristian_Pradilla_Resume.jpg" class="download-btn">
+  <!-- HEADER -->
+  <header class="resume-header">
+    <div class="resume-heading">
+      <h1 class="main-title">My <span class="neon-text">Resume</span></h1>
+      <p class="resume-subtitle">
+        Khristian Carl J. Pradilla &middot; Web Development Student &middot; Angeles City, Pampanga
+      </p>
+    </div>
+
+    <a href="/latestResume.png" download="Khristian_Pradilla_Resume.jpg" class="download-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
       Download Resume
     </a>
+  </header>
+
+  <!-- SIDEBAR + PROJECTS -->
+  <div class="resume-layout">
+
+    <aside class="resume-sidebar">
+
+      <div class="sidebar-block">
+        <h2 class="section-heading">Education</h2>
+        <div class="timeline">
+          @for (edu of education; track edu.school) {
+            <div class="timeline-item">
+              <p class="date-range">{{ edu.years }}</p>
+              <h3 class="item-name">{{ edu.school }}</h3>
+              <p class="item-sub">{{ edu.program }}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <h2 class="section-heading">Skills</h2>
+        <ul class="chip-list">
+          @for (skill of skills; track skill) {
+            <li class="chip">{{ skill }}</li>
+          }
+        </ul>
+      </div>
+
+      <div class="sidebar-block">
+        <h2 class="section-heading">Languages</h2>
+        <ul class="chip-list">
+          @for (lang of languages; track lang) {
+            <li class="chip">{{ lang }}</li>
+          }
+        </ul>
+      </div>
+
+    </aside>
+
+    <div class="resume-main">
+      <h2 class="section-heading">Projects</h2>
+
+      <div class="project-grid">
+        @for (project of projects; track project.name) {
+          <article class="project-card">
+            <h3 class="project-title">{{ project.name }}</h3>
+            <p class="project-type">{{ project.type }}</p>
+            <p class="project-desc">{{ project.description }}</p>
+
+            @if (project.tags.length) {
+              <ul class="tag-list">
+                @for (tag of project.tags; track tag) {
+                  <li class="tag">{{ tag }}</li>
+                }
+              </ul>
+            }
+          </article>
+        }
+      </div>
+    </div>
+
   </div>
 
-  <div class="resume-grid">
-    <div class="resume-col">
-      <h2 class="column-title underline">Education</h2>
-      <div class="resume-item">
-        <p class="date-range">(2017 - 2023)</p>
-        <h3 class="item-name">Don Bosco Mabalacat</h3>
-        <p class="item-sub">ABM</p>
-      </div>
-      <div class="resume-item">
-        <p class="date-range">(2023 - Present)</p>
-        <h3 class="item-name">Holy Angel University</h3>
-        <p class="item-sub">Bachelor of Science in Information Technology, Specialization in Web Development</p>
-      </div>
-    </div>
-
-    <div class="resume-col">
-      <h2 class="column-title underline">Projects</h2>
-      <div class="resume-item">
-        <h3 class="project-title neon-text">DOMORE</h3>
-        <h4 class="item-name">Student Planner</h4>
-        <p class="item-description">Full-stack web planner integrating task and file management. Collaborated as a core team member, building the system with Node.js, Express, and MongoDB.</p>
-      </div>
-      <div class="resume-item">
-        <h3 class="project-title neon-text">TOP FRAG</h3>
-        <h4 class="item-name">Fragrance Store Website</h4>
-        <p class="item-description">A web-based fragrance storefront showcasing curated perfume collections. Built using HTML, CSS, and JavaScript with a responsive layout.</p>
-      </div>
-      <div class="resume-item">
-        <h3 class="project-title neon-text">FILSAFE</h3>
-        <h4 class="item-name">Security Client Website</h4>
-        <p class="item-description">Professional security platform showcasing high-end protective hardware. Built with Angular and Node.js for a seamless full-stack experience.</p>
-      </div>
-    </div>
-
-    <div class="resume-col right-align-col">
-      <h2 class="column-title underline">Skills</h2>
-      <ul class="skills-list">
-        <li>JavaScript</li>
-        <li>HTML / CSS</li>
-        <li>PHP</li>
-        <li>Python</li>
-        <li>Angular</li>
-      </ul>
-      <h2 class="column-title underline spacer-top">Language</h2>
-      <ul class="skills-list">
-        <li>English</li>
-        <li>Filipino</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-divider"></div>
-
+  <!-- CERTIFICATIONS -->
   <div class="certifications-section">
-    <h2 class="column-title center neon-text">Certifications</h2>
+    <h2 class="section-heading center">Certifications</h2>
+
     <div class="cert-grid">
-      <a href="https://www.freecodecamp.org/certification/keysi/javascript-algorithms-and-data-structures" target="_blank" class="cert-link">
-        <div class="cert-card">
-          <h3>Legacy JavaScript Algorithms and Data Structure V7</h3>
-          <p class="cert-org">[ Free Code Camp ]</p>
-          <p class="cert-date neon-text">Issued: July 17, 2025</p>
-        </div>
-      </a>
+      @for (cert of certs; track $index) {
+        <a [attr.href]="cert.url ?? null"
+           [attr.target]="cert.url ? '_blank' : null"
+           [attr.tabindex]="cert.image ? 0 : null"
+           [attr.role]="cert.image ? 'button' : null"
+           [class.has-image]="cert.image"
+           (click)="onCertClick($event, cert)"
+           (keydown.enter)="onCertClick($event, cert)"
+           rel="noopener"
+           class="cert-link">
 
-      <a href="https://www.freecodecamp.org/certification/keysi/responsive-web-design" target="_blank" class="cert-link">
-        <div class="cert-card">
-          <h3>Legacy Responsive Web Design V8</h3>
-          <p class="cert-org">[ Free Code Camp ]</p>
-          <p class="cert-date neon-text">Issued: August 27, 2024</p>
-        </div>
-      </a>
+          <div class="cert-card">
 
-      <a href="https://www.freecodecamp.org/certification/khristianprads/back-end-development-and-apis" target="_blank" class="cert-link">
-        <div class="cert-card">
-          <h3>Back End Development and APIs V8</h3>
-          <p class="cert-org">[ Free Code Camp ]</p>
-          <p class="cert-date neon-text">Issued: October 3, 2025</p>
-        </div>
-      </a>
+            <div class="cert-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              </svg>
+            </div>
 
-      <a href="https://app-na2.hubspot.com/academy/achievements/8n5fvs55/en/1/khristian-pradilla/digital-advertising" target="_blank" class="cert-link">
-        <div class="cert-card">
-          <h3>Digital Advertising</h3>
-          <p class="cert-org">[ HubSpot Academy ]</p>
-          <p class="cert-date neon-text">Issued: October 23, 2025</p>
-        </div>
-      </a>
+            <div class="cert-body">
+              <h3>{{ cert.title }}</h3>
+              <p class="cert-org">{{ cert.org }}</p>
+              <p class="cert-date">{{ cert.date }}</p>
 
-      <a href="https://app-na2.hubspot.com/academy/achievements/1qw9hmd4/en/1/khristian-pradilla/seo" target="_blank" class="cert-link">
-        <div class="cert-card">
-          <h3>SEO</h3>
-          <p class="cert-org">[ HubSpot Academy ]</p>
-          <p class="cert-date neon-text">Issued: January 10, 2026</p>
-        </div>
-      </a>
+              @if (cert.image || cert.url) {
+                <span class="cert-action">{{ cert.image ? 'View certificate' : 'Open link' }} &rarr;</span>
+              }
+            </div>
 
-      <a href="https://app-na2.hubspot.com/academy/achievements/dm4896sn/en/1/khristian-pradilla/seo-ii" target="_blank" class="cert-link">
-        <div class="cert-card">
-          <h3>SEO II</h3>
-          <p class="cert-org">[ HubSpot Academy ]</p>
-          <p class="cert-date neon-text">Issued: Febuary 6, 2026</p>
-        </div>
-      </a>
+          </div>
+        </a>
+      }
     </div>
   </div>
+
+  <!-- CERTIFICATE POPUP -->
+  @if (selectedCert(); as cert) {
+    <app-cert-lightbox
+      [src]="cert.image!"
+      [title]="cert.title"
+      (closed)="closeCert()" />
+  }
 
 </section>

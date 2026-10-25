@@ -1,5 +1,6 @@
 <section class="about-container">
 
+  <!-- PROFILE + SLIDER -->
   <div class="profile-grid">
 
     <div class="profile-image">
@@ -13,18 +14,80 @@
     <div class="profile-text">
       <h1 class="about-title">About <span class="neon-text">Me</span></h1>
 
-      <p class="about-description">
-        My name is Khristian Carl J. Pradilla and I am a 21-year-old web development student who resides in Angeles City Pampanga. My career in technology development operates through two main forces which express my artistic skills and my logical reasoning abilities. My front-end development work focuses on creating clean designs which maintain responsive capabilities while delivering visually appealing user interfaces.
-      </p>
+      <div class="about-slider" aria-live="polite">
+        @for (slide of slides; track slide.label; let i = $index) {
+          <div class="about-slide" [class.active]="current() === i">
+            <h3 class="slide-label">{{ slide.label }}</h3>
+            @for (p of slide.paragraphs; track $index) {
+              <p class="about-description">{{ p }}</p>
+            }
+          </div>
+        }
+      </div>
 
-      <p class="about-description">
-        I design websites with neon colors and minimalist design elements because I want to create user experiences which users find easy to navigate. My free time gets divided between coding and playing video games. Gaming has improved my ability to think strategically while solving difficult problems under pressure which I apply in my development work.
-      </p>
+      <div class="slider-controls">
+        <button class="slider-btn" (click)="prev()" aria-label="Previous">&#8592;</button>
 
+        <div class="slider-dots">
+          @for (slide of slides; track slide.label; let i = $index) {
+            <button
+              class="dot"
+              [class.active]="current() === i"
+              (click)="goTo(i)"
+              [attr.aria-label]="'Go to ' + slide.label">
+            </button>
+          }
+        </div>
+
+        <button class="slider-btn" (click)="next()" aria-label="Next">&#8594;</button>
+      </div>
     </div>
 
   </div>
 
+  <!-- CERTIFICATIONS (featured only) -->
+  <div class="about-certs">
+
+    <h2 class="neon-text section-title">Certifications</h2>
+
+    <div class="about-cert-grid">
+      @for (cert of featuredCerts; track $index) {
+        <a [attr.href]="cert.url ?? null"
+           [attr.target]="cert.url ? '_blank' : null"
+           [attr.tabindex]="cert.image ? 0 : null"
+           [attr.role]="cert.image ? 'button' : null"
+           [class.has-image]="cert.image"
+           (click)="onCertClick($event, cert)"
+           (keydown.enter)="onCertClick($event, cert)"
+           rel="noopener"
+           class="about-cert-card">
+
+          <div class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="6"/>
+              <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+            </svg>
+          </div>
+
+          <div class="cert-info">
+            <h3>{{ cert.title }}</h3>
+            <p class="cert-org">{{ cert.org }}</p>
+            <p class="cert-date">{{ cert.date }}</p>
+            @if (cert.image) {
+              <p class="cert-hint">Click to view certificate</p>
+            }
+          </div>
+
+        </a>
+      }
+    </div>
+
+    <a routerLink="/resume" class="view-all-link">View all certifications &rarr;</a>
+
+  </div>
+
+  <!-- SKILLS -->
   <div class="skills-section">
 
     <h2 class="neon-text section-title">Skills and Expertise</h2>
@@ -38,28 +101,22 @@
           <span class="neon-icon">&lt;/&gt;</span> Technical Skills
         </h3>
 
-        <div class="skill-list">
-
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>HTML & CSS</span>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>Angular</span>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>JavaScript</span>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>GitHub</span>
-          </div>
-
+        <div class="tech-grid">
+          @for (tech of techs; track tech.name) {
+            <div class="tech-tile">
+              @if (tech.icon) {
+                <i [class]="tech.icon"></i>
+              } @else {
+                <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="14" height="10" rx="1.5"/>
+                  <path d="M6 18h6M9 14v4"/>
+                  <rect x="15" y="9" width="7" height="11" rx="1.5"/>
+                </svg>
+              }
+              <span>{{ tech.name }}</span>
+            </div>
+          }
         </div>
 
       </div>
@@ -71,28 +128,68 @@
           <span class="neon-icon">★</span> Soft Skills
         </h3>
 
-        <div class="skill-list">
+        <div class="tech-grid">
+          @for (skill of softSkills; track skill.name) {
+            <div class="tech-tile">
 
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>Problem Solving</span>
-          </div>
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                @switch (skill.icon) {
+                  @case ('bulb') {
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+                    <path d="M9 18h6"/>
+                    <path d="M10 22h4"/>
+                  }
+                  @case ('chat') {
+                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+                  }
+                  @case ('adapt') {
+                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                    <path d="M21 3v5h-5"/>
+                    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                    <path d="M8 16H3v5"/>
+                  }
+                  @case ('palette') {
+                    <circle cx="13.5" cy="6.5" r=".5"/>
+                    <circle cx="17.5" cy="10.5" r=".5"/>
+                    <circle cx="8.5" cy="7.5" r=".5"/>
+                    <circle cx="6.5" cy="12.5" r=".5"/>
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.84-.44-1.13-.29-.29-.44-.65-.44-1.13a1.64 1.64 0 0 1 1.67-1.67h2c3.05 0 5.55-2.5 5.55-5.55C21.97 6.01 17.46 2 12 2z"/>
+                  }
+                  @case ('search') {
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                  }
+                  @case ('users') {
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  }
+                  @case ('clock') {
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  }
+                  @case ('branch') {
+                    <line x1="6" y1="3" x2="6" y2="15"/>
+                    <circle cx="18" cy="6" r="3"/>
+                    <circle cx="6" cy="18" r="3"/>
+                    <path d="M18 9a9 9 0 0 1-9 9"/>
+                  }
+                  @case ('book') {
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  }
+                  @case ('shield') {
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  }
+                }
+              </svg>
 
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>Communication</span>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>Adaptability</span>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-indicator"></div>
-            <span>Creative Thinking</span>
-          </div>
-
+              <span>{{ skill.name }}</span>
+            </div>
+          }
         </div>
 
       </div>
@@ -100,5 +197,13 @@
     </div>
 
   </div>
+
+  <!-- CERTIFICATE POPUP -->
+  @if (selectedCert(); as cert) {
+    <app-cert-lightbox
+      [src]="cert.image!"
+      [title]="cert.title"
+      (closed)="closeCert()" />
+  }
 
 </section>
