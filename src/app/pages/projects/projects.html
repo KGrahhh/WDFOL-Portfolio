@@ -1,188 +1,92 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Khristian Pradilla | Web Development Projects Portfolio</title>
-
-<meta name="description" content="Explore the web development projects of Khristian Pradilla including e-commerce platforms, productivity apps, reservation systems, and security solutions.">
-
-<meta name="keywords" content="Khristian Pradilla, web developer portfolio, HTML CSS projects, Vite Node apps, reservation system, ecommerce website, productivity planner">
-
-<meta name="author" content="Khristian Pradilla">
-<meta name="robots" content="index, follow">
-
-<!-- Open Graph Social Sharing -->
-<meta property="og:title" content="Khristian Pradilla | Web Development Projects">
-<meta property="og:description" content="A showcase of modern web platforms and applications including productivity tools, reservation systems, and e-commerce websites.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://khristianpradilla.vercel.app/projects">
-<meta property="og:image" content="/portfolio-preview.png">
-<meta property="og:site_name" content="Khristian Pradilla Portfolio">
-
-<!-- Browser Theme Color -->
-<meta name="theme-color" content="#0a0a0a">
-
-</head>
-
-<body>
-
 <section class="projects-container">
 
   <div class="projects-header">
     <h1 class="section-title">My <span class="neon-text">Projects</span></h1>
   </div>
 
+  <!-- FILTER BUTTONS -->
+  <div class="filter-bar" role="group" aria-label="Filter projects">
+    @for (f of filters; track f.id) {
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="activeFilter() === f.id"
+        [attr.aria-pressed]="activeFilter() === f.id"
+        (click)="setFilter(f.id)">
+        {{ f.label }}
+        <span class="filter-count">{{ f.count }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- PROJECT CARDS -->
   <div class="projects-grid">
+    @for (project of filteredProjects(); track project.name) {
+      <div class="project-card"
+           [class.has-gallery]="project.gallery?.length"
+           [attr.tabindex]="project.gallery?.length ? 0 : null"
+           [attr.role]="project.gallery?.length ? 'button' : null"
+           [attr.aria-label]="project.gallery?.length ? 'View screenshots of ' + project.name : null"
+           (click)="openGallery(project)"
+           (keydown.enter)="openGallery(project)">
 
-    <!-- Topfrag -->
-<div class="project-card">
-  <div class="project-image-wrapper neon-border">
-    <img src="/topfrag.png" alt="Topfrag perfume ecommerce website project">
-  </div>
-  <div class="project-info">
-    <h3 class="project-name">Topfrag</h3>
-    <p class="project-desc">
-      An elegant e-commerce perfume store built with HTML and CSS, featuring a minimalist aesthetic designed to match user personalities.
-    </p>
-    <p class="project-role"><strong>Role:</strong> Project Manager | Frontend | UI/UX</p>
-    <p class="project-contribution"><strong>Contribution:</strong> Led the overall look and functionality of the website, ensuring a seamless user experience.</p>
-    <div class="project-tags">
-      <span>HTML</span>
-      <span>CSS</span>
-    </div>
-    <a href="https://topfragshop.netlify.app/" class="btn-outline small">View Details</a>
-  </div>
-</div>
+        <div class="project-image-wrapper neon-border" [class.logo]="project.logo">
+          @if (project.image) {
+            <img [src]="project.image" [alt]="project.alt ?? project.name">
+          } @else {
+            <div class="project-placeholder" aria-hidden="true">
+              <span>{{ project.name.charAt(0) }}</span>
+            </div>
+          }
+        </div>
 
-<!-- DoMore -->
-<div class="project-card">
-  <div class="project-image-wrapper neon-border">
-    <img src="/DomoreLogin.png" alt="DoMore productivity planner and pomodoro timer application">
-  </div>
-  <div class="project-info">
-    <h3 class="project-name">DoMore</h3>
-    <p class="project-desc">
-      A high-performance student task planner and Pomodoro timer built with Vite and Node for disciplined productivity.
-    </p>
-    <p class="project-role"><strong>Role:</strong> Data and Frontend</p>
-    <p class="project-contribution"><strong>Contribution:</strong> Managed data handling and implemented frontend features for smooth user interaction.</p>
-    <div class="project-tags">
-      <span>Vite</span>
-      <span>Node</span>
-    </div>
-    <a href="https://domore-student-planner.netlify.app/" class="btn-outline small">View Details</a>
-  </div>
-</div>
+        <div class="project-info">
+          <h3 class="project-name">{{ project.name }}</h3>
+          <p class="project-desc">{{ project.description }}</p>
 
-<!-- Filsafe -->
-<div class="project-card">
-  <div class="project-image-wrapper neon-border">
-    <img src="/Filsafe.png" alt="FilSafe security solutions website with CCTV and vault systems">
-  </div>
-  <div class="project-info">
-    <h3 class="project-name">Filsafe</h3>
-    <p class="project-desc">
-      A professional security solutions platform showcasing high-end vault systems, CCTV technologies, and advanced intrusion protection.
-    </p>
-    <p class="project-role"><strong>Role:</strong> Frontend | UI/UX</p>
-    <p class="project-contribution"><strong>Contribution:</strong> Led the overall look and feel of the platform, ensuring an intuitive and polished interface.</p>
-    <div class="project-tags">
-      <span>Angular</span>
-      <span>Node</span>
-    </div>
-    <a href="https://filsafe.shop/" target="_blank" rel="noopener noreferrer" class="btn-outline small">View Details</a>
-  </div>
-</div>
+          @if (project.role) {
+            <p class="project-role"><strong>Role:</strong> {{ project.role }}</p>
+          }
 
-<!-- Popong's Samgyup -->
-<div class="project-card">
-  <div class="project-image-wrapper neon-border">
-    <img src="/Samgy.png" alt="Popong's Samgyup Korean BBQ reservation platform">
-  </div>
-  <div class="project-info">
-    <h3 class="project-name">Popong's Anayadi Samgyup</h3>
-    <p class="project-desc">
-      A vibrant Korean BBQ reservation platform featuring a calendar-based booking system and a modern orange-themed interface.
-    </p>
-    <p class="project-role"><strong>Role:</strong> Frontend</p>
-    <p class="project-contribution"><strong>Contribution:</strong> Developed frontend components and ensured smooth interactions across the platform.</p>
-    <div class="project-tags">
-      <span>Figma</span>
-    </div>
-    <a href="https://www.figma.com/design/MOWQoEtukkscBANqUQuDnX/Untitled?node-id=0-1&t=mYRIyCKuwNE8X4Ca-1" target="_blank" rel="noopener noreferrer" class="btn-outline small">View Details</a>
-  </div>
-</div>
+          @if (project.contribution) {
+            <p class="project-contribution"><strong>Contribution:</strong> {{ project.contribution }}</p>
+          }
 
-<!-- Cush Lounge -->
-<div class="project-card">
-  <div class="project-image-wrapper neon-border">
-    <img src="/Cush.png" alt="Cush Lounge customer loyalty management dashboard">
-  </div>
-  <div class="project-info">
-    <h3 class="project-name">Cush Lounge</h3>
-    <p class="project-desc">
-      A specialized management dashboard designed for loyalty tracking, customer communication, and membership management.
-    </p>
-    <p class="project-role"><strong>Role:</strong> Frontend and Data</p>
-    <p class="project-contribution"><strong>Contribution:</strong> Built frontend interfaces and managed data integration for user dashboards.</p>
-    <div class="project-tags">
-      <span>Figma</span>
-    </div>
-    <a href="https://www.figma.com/design/h5FRqSWsxupk6V4WlWddMZ/Untitled?node-id=0-1&t=4965DJ5Ob3f3dwRg-1" target="_blank" rel="noopener noreferrer" class="btn-outline small">View Details</a>
-  </div>
-</div>
+          @if (project.tags.length) {
+            <div class="project-tags">
+              @for (tag of project.tags; track tag) {
+                <span>{{ tag }}</span>
+              }
+            </div>
+          }
 
-<!-- ScrubHub -->
-<div class="project-card">
-  <div class="project-image-wrapper neon-border">
-    <img src="/scrubhub.png" alt="Scrub Hub car wash service platform with appointment scheduling">
-  </div>
-  <div class="project-info">
-    <h3 class="project-name">ScrubHub</h3>
-    <p class="project-desc">
-      A sleek car wash platform with neon-on-black design featuring service menus, appointment scheduling, and admin directories.
-    </p>
-    <p class="project-role"><strong>Role:</strong> Frontend | UI/UX</p>
-    <p class="project-contribution"><strong>Contribution:</strong> Led the overall design and user interface of the platform for a modern aesthetic.</p>
-    <div class="project-tags">
-      <span>Figma</span>
-    </div>
-    <a href="https://www.figma.com/design/bmmd3Jhb3AfemlanhU2iDI/Untitled?node-id=0-1&t=etRA9gKeRTJ19dKn-1" target="_blank" rel="noopener noreferrer" class="btn-outline small">View Details</a>
-  </div>
-</div>
+          @if (project.link || project.gallery?.length) {
+            <div class="project-actions">
+              @if (project.link) {
+                <a [href]="project.link" target="_blank" rel="noopener noreferrer" class="btn-outline small"
+                   (click)="$event.stopPropagation()"
+                   (keydown.enter)="$event.stopPropagation()">View Details</a>
+              }
 
-<!-- Life Saver -->
-<div class="project-card">
-  <div class="project-image-wrapper neon-border">
-    <img src="/LScare.png" alt="Life Saver">
-  </div>
-  <div class="project-info">
-    <h3 class="project-name">Life Saver</h3>
-    <p class="project-desc">
-      LifeSaver is a healthcare-related platform focused on providing accessible and reliable care services through digital solutions, helping improve coordination and efficiency in healthcare operations.
-    </p>
-    <p class="project-role"><strong>Role:</strong> Frontend | UI/UX</p>
-    <p class="project-contribution"><strong>Contribution:</strong> Led the overall design and user interface of the platform.</p>
-    <div class="project-tags">
-      <span>React</span>
-      <span>Tailwind</span>
-      <span>Node</span>
-      <span>PostgreSQL</span>
-      <span>AWS</span>
-    </div>
-    <a href="https://www.lscarecircle.com.ph/" target="_blank" rel="noopener noreferrer" class="btn-outline small">View Details</a>
-  </div>
-</div>
+              @if (project.gallery?.length) {
+                <span class="btn-outline small">View Screenshots ({{ project.gallery?.length }})</span>
+              }
+            </div>
+          }
+        </div>
 
+      </div>
+    } @empty {
+      <p class="empty-state">No projects in this category yet.</p>
+    }
   </div>
+
+  <!-- SCREENSHOT POPUP -->
+  @if (activeGallery(); as g) {
+    <app-project-gallery
+      [images]="g.images"
+      [title]="g.title"
+      (closed)="closeGallery()" />
+  }
 
 </section>
-
-</body>
-</html>
-

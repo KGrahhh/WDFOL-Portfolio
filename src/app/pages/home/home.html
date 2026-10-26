@@ -1,25 +1,37 @@
-<section class="home-container">
+<!-- ============ HERO ============ -->
+<section class="home-container" (mousemove)="onHeroMove($event)">
+
+  <div class="cursor-glow"></div>
+
   <div class="hero-content">
-    <h1 class="greeting"><span class="neon-text">Khristian Pradilla!</span></h1>
-    
+
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      {{ availability }}
+    </div>
+
+    <h1 class="greeting"><span class="neon-text">Khristian Pradilla</span></h1>
+
     <div class="role-title">
-      <span class="neon-text">></span> Web Developer | UI/UX Designer
+      <span class="neon-text">&gt;</span> Web Developer | UI/UX Designer
     </div>
 
     <p class="description">
-      A web development student with a strong interest in UI/UX design. 
-      I enjoy designing clean, responsive, and user-friendly websites while 
+      A web development student with a strong interest in UI/UX design.
+      I enjoy designing clean, responsive, and user-friendly websites while
       continuously learning new technologies to improve both my creative and technical skills.
     </p>
 
     <div class="cta-group">
       <button class="btn-primary" routerLink="/about">View Profile</button>
       <button class="btn-outline" routerLink="/contact">Hire Me</button>
+      <a class="btn-outline btn-link" href="/latestResume.png" download="Khristian_Pradilla_Resume.png">Download Resume</a>
     </div>
   </div>
 
   <div class="hero-visual">
     <div class="visual-wrapper">
+
       <a routerLink="/about" class="image-link">
         <div class="image-accent-box">
           <div class="image-frame">
@@ -27,6 +39,131 @@
           </div>
         </div>
       </a>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ DIVIDER ============ -->
+<div class="section-divider" aria-hidden="true"></div>
+
+<!-- ============ STATS ============ -->
+<section class="home-section stats-section">
+  <div class="stats-grid reveal" data-stats>
+    @for (stat of stats; track stat.label; let i = $index) {
+      <div class="stat-card">
+        <div class="stat-number">{{ statValues()[i] }}{{ stat.suffix }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ============ FEATURED PROJECTS ============ -->
+<section class="home-section">
+
+  <div class="section-head reveal">
+    <p class="section-eyebrow">Selected Work</p>
+    <h2 class="section-title">Featured <span class="neon-text">Projects</span></h2>
+  </div>
+
+  <div class="feature-grid">
+    @for (p of featured; track p.name; let i = $index) {
+      <div class="reveal" [style.--d]="(i * 0.12) + 's'">
+        <article class="feature-card"
+                 (mousemove)="onTilt($event)"
+                 (mouseleave)="resetTilt($event)">
+
+          <div class="feature-image" [class.logo]="p.logo">
+            <img [src]="p.image" [alt]="p.alt">
+          </div>
+
+          <h3 class="feature-name">{{ p.name }}</h3>
+          <p class="feature-summary">{{ p.summary }}</p>
+
+          <div class="feature-tags">
+            @for (tag of p.tags; track tag) {
+              <span>{{ tag }}</span>
+            }
+          </div>
+
+          @if (p.link) {
+            <a [href]="p.link" target="_blank" rel="noopener noreferrer" class="feature-link">Visit site &rarr;</a>
+          } @else {
+            <a routerLink="/projects" class="feature-link">See screenshots &rarr;</a>
+          }
+
+        </article>
+      </div>
+    }
+  </div>
+
+  <div class="section-action reveal">
+    <a routerLink="/projects" class="btn-outline btn-link">View all projects</a>
+  </div>
+
+</section>
+
+
+
+<!-- ============ EXPERIENCE + CLIENTS ============ -->
+<section class="home-section">
+
+  <div class="section-head reveal">
+    <p class="section-eyebrow">Experience</p>
+    <h2 class="section-title">Real-World <span class="neon-text">Work</span></h2>
+  </div>
+
+  <div class="trust-grid">
+
+    <div class="trust-card reveal">
+      <div class="trust-logo">
+        <img src="/ciac-logo.png" alt="Clark International Airport Corporation logo">
+      </div>
+      <div>
+        <h3>On-the-Job Training at CIAC</h3>
+        <p>
+          Completed my OJT at Clark International Airport Corporation, working on internal systems
+          as a frontend developer, Tech support, support engineer and software tester.
+        </p>
+      </div>
+    </div>
+
+    <div class="trust-card reveal" [style.--d]="'0.12s'">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
+      </div>
+      <div>
+        <h3>Built for Real Clients</h3>
+        <p>Live websites delivered for businesses, from design to launch.</p>
+        <div class="trust-chips">
+          <span>Filsafe</span>
+          <span>Life Saver</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ============ CLOSING CALL TO ACTION ============ -->
+<section class="home-section cta-section">
+  <div class="cta-box reveal">
+    <p class="section-eyebrow">Get in touch</p>
+    <h2 class="cta-title">Let's build something <span class="neon-text">together!</span></h2>
+    <p class="cta-text">
+      Have a project, an internship or a freelance idea? I'd love to hear about it.
+    </p>
+
+    <div class="cta-group">
+      <button class="btn-primary" routerLink="/contact">Contact Me</button>
+      <a class="btn-outline btn-link" href="/My_Resume.jpg" download="Khristian_Pradilla_Resume.jpg">Download Resume</a>
     </div>
   </div>
 </section>

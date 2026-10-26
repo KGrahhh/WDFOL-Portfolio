@@ -49,9 +49,24 @@
   left:-10px;
 }
 
+.image-frame{
+  display:grid;              /* all photos share one cell */
+  overflow:hidden;
+  background-color:#0a0a0a;
+}
+
 .image-frame img{
+  grid-area:1 / 1;
   width:100%;
-  transition:0.5s ease;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  opacity:0;
+  transition:opacity 0.5s ease, transform 0.5s ease;
+}
+
+.image-frame img.active{
+  opacity:1;
 }
 
 .profile-image:hover img{

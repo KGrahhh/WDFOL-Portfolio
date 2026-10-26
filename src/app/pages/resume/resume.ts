@@ -66,25 +66,22 @@ export class Resume {
       tags: ['Angular', 'Node.js']
     },
     {
-      // DRAFT: check this matches what you built
       name: 'LIFE SAVER',
-      type: 'Client Website',
+      type: 'Healthcare Client Website',
       description: 'Client website for a healthcare service provider, with a hero section, an interactive services section, and responsive About and Contact pages.',
-      tags: ['React']
+      tags: ['React','AWS','Node.js','PostGreSQL','Motion']
     },
     {
-      // DRAFT: check this matches what you built
       name: 'DOCUMENT TRACKER',
       type: 'System for Tracking Documents',
       description: 'Document tracking log for the MISD office at CIAC, with document types and statuses, remarks, Excel export, and import of legacy CSV records.',
-      tags: ['React', 'Vite', 'Supabase']
+      tags: ['React', 'Node.js', 'MySQL']
     },
     {
-      // DRAFT: add what you built and the tech stack
       name: 'RISK MANAGEMENT',
       type: 'System for Managing Risks',
       description: 'System for managing risks at Clark International Airport Corporation (CIAC).',
-      tags: []
+      tags: ['React','Node.js','MySQL']
     }
   ];
 

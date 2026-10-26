@@ -4,12 +4,17 @@
   <div class="profile-grid">
 
     <div class="profile-image">
-      <div class="image-accent-box">
-        <div class="image-frame">
-          <img src="/profile.png" alt="Khristian Pradilla">
+        <div class="image-accent-box">
+          <div class="image-frame">
+            @for (slide of slides; track slide.label; let i = $index) {
+              <img class="slide-img"
+                   [class.active]="current() === i"
+                   [src]="slide.image"
+                   [alt]="slide.alt">
+            }
+          </div>
         </div>
       </div>
-    </div>
 
     <div class="profile-text">
       <h1 class="about-title">About <span class="neon-text">Me</span></h1>

@@ -15,6 +15,8 @@ export class About {
   slides = [
     {
       label: 'Who I Am',
+      image: '/kcprads1.jpg',
+      alt: 'Khristian Pradilla',
       paragraphs: [
         'My name is Khristian Carl J. Pradilla, A Web Development student who resides in Angeles City Pampanga.',
         'My career in technology development operates through two main forces which express my artistic skills and my logical reasoning abilities.'
@@ -22,13 +24,17 @@ export class About {
     },
     {
       label: 'How I Design',
+      image: '/kcprads2.jpg',
+      alt: 'Khristian Photo#2',
       paragraphs: [
         'My front-end development work focuses on creating clean designs which maintain responsive capabilities while delivering visually appealing user interfaces.',
-        'I design websites with neon colors and minimalist design elements because I want to create user experiences which users find easy to navigate.'
+        'I design websites with unique, and minimalist design elements because I want to create user experiences which users find easy to navigate.'
       ]
     },
     {
       label: 'Beyond the Code',
+      image: '/kcprads3.jpg',
+      alt: 'Khristian Photo#3',
       paragraphs: [
         'My free time gets divided between coding and playing video games.',
         'Gaming has improved my ability to think strategically while solving difficult problems under pressure which I apply in my development work.'
