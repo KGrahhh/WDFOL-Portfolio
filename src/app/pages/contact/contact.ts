@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 
 @Component({
@@ -9,34 +9,35 @@ import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
   styleUrl: './contact.css',
 })
 export class Contact {
-  // Use these to keep track of the form state
-  isSending = false;
+  isSending = signal(false);
 
   public sendEmail(e: Event) {
     e.preventDefault();
 
-    if (this.isSending) return; // Prevent double-clicks
+    if (this.isSending()) return; 
 
-    this.isSending = true;
+    const form = e.target as HTMLFormElement;
+    this.isSending.set(true);
 
-    // --- REPLACE THESE WITH YOUR ACTUAL IDS FROM THE EMAILJS DASHBOARD ---
-    const SERVICE_ID = 'service_rkepmkv'; // Found in 'Email Services'
-    const TEMPLATE_ID = 'template_lr3ejj1'; // Found in 'Email Templates'
-    const PUBLIC_KEY = 'nL2PgIwyaiJE6gAo_'; // Found in 'Account' or 'Settings'
-    // --------------------------------------------------------------------
+    const SERVICE_ID = 'service_rkepmkv';
+    const TEMPLATE_ID = 'template_lr3ejj1';
+    const PUBLIC_KEY = 'nL2PgIwyaiJE6gAo_';
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target as HTMLFormElement, PUBLIC_KEY)
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
       .then((result: EmailJSResponseStatus) => {
         console.log('SUCCESS!', result.status, result.text);
         alert('Message sent successfully! I will get back to you soon.');
-        (e.target as HTMLFormElement).reset(); // Clears the form fields
+        form.reset();
       })
-      .catch((error) => {
-        console.error('FAILED...', error);
-        alert('Oops! Something went wrong. Please try again or email me directly.');
+      .catch((error: unknown) => {
+        const err = error as Partial<EmailJSResponseStatus>;
+        console.error('EmailJS FAILED:', err.status, err.text, error);
+
+      
+        alert(`Oops! Something went wrong [${err.status ?? 'no status'}: ${err.text ?? 'no message'}]. Please try again or email me directly.`);
       })
       .finally(() => {
-        this.isSending = false; // Re-enables the button
+        this.isSending.set(false);
       });
   }
 }
